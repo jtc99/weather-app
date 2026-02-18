@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import './App.css'
 
+const API_BASE = import.meta.env.VITE_API_BASE ?? '/api'
+
 function App() {
   const [city, setCity] = useState('')
   const [weather, setWeather] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-
   async function handleSearch(e) {
     e && e.preventDefault()
     if (!city) return
@@ -14,7 +15,7 @@ function App() {
     setError(null)
     setWeather(null)
     try {
-      const res = await fetch('/api/weather', {
+      const res = await fetch(`${API_BASE}/weather`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ q: city }),

@@ -4,7 +4,11 @@ import os
 from dotenv import load_dotenv
 import httpx
 
-load_dotenv() #reads the .env file and loads the environment variables
+from pathlib import Path
+from dotenv import load_dotenv
+
+env_path = Path(__file__).resolve().parents[1] / ".env" #backend/.env
+load_dotenv(env_path)
 API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
 app = FastAPI()
